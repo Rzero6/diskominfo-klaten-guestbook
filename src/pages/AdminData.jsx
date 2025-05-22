@@ -1,5 +1,12 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Button, Container, Form, InputGroup, Table } from "react-bootstrap";
+import { useContext, useEffect, useState } from "react";
+import {
+  Button,
+  Container,
+  Form,
+  Image,
+  InputGroup,
+  Table,
+} from "react-bootstrap";
 import { GuestbookContext } from "../api/GuestBookContext";
 import { useNavigate } from "react-router-dom";
 import html2pdf from "html2pdf.js";
@@ -8,6 +15,8 @@ import dayjs from "dayjs";
 import DatePicker from "react-datepicker";
 import { FaFileDownload, FaTimes } from "react-icons/fa";
 import { BiSolidDoorOpen } from "react-icons/bi";
+import klatenLogo from "../assets/logo-klaten.png";
+import deptLogo from "../assets/logo-diskominfo-klaten.png";
 
 const AdminData = () => {
   const { entries, setEntries } = useContext(GuestbookContext);
@@ -35,7 +44,7 @@ const AdminData = () => {
 
   useEffect(() => {
     const filtered = entries.filter((entry) => {
-      const formatedDate = dayjs(date).format("DD-MM-YYYY HH:mm");
+      const formatedDate = dayjs(date);
       const matchDate = date
         ? dayjs(entry.tanggal).isSame(dayjs(formatedDate), "day")
         : true;
@@ -53,35 +62,35 @@ const AdminData = () => {
     setFilteredData(filtered);
   }, [entries, date, search]);
 
-  // useEffect(() => {
-  //   if (entries.length === 0) {
-  //     const sampleEntries = [
-  //       {
-  //         nama: "Reynold Kunarto",
-  //         keperluan: "Magang",
-  //         alamat: "-",
-  //         institusi: "UAJY",
-  //         tanggal: dayjs(),
-  //       },
-  //       {
-  //         nama: "Suwarmi",
-  //         keperluan: "Berkeluh kesah",
-  //         alamat: "-",
-  //         institusi: "-",
-  //         tanggal: dayjs().subtract(1, "day"),
-  //       },
-  //       {
-  //         nama: "Hartoni",
-  //         keperluan: "Mengunjungi istri",
-  //         alamat: "Jalan Mawar 22",
-  //         institusi: "-",
-  //         tanggal: dayjs().add(2, "day"),
-  //       },
-  //     ];
-  //     setEntries(sampleEntries);
-  //     setFilteredData(sampleEntries);
-  //   }
-  // }, [entries, setEntries]);
+  useEffect(() => {
+    if (entries.length === 0) {
+      const sampleEntries = [
+        {
+          nama: "Reynold Kunarto",
+          keperluan: "Magang",
+          alamat: "-",
+          institusi: "UAJY",
+          tanggal: dayjs(),
+        },
+        {
+          nama: "Suwarmi",
+          keperluan: "Berkeluh kesah",
+          alamat: "-",
+          institusi: "-",
+          tanggal: dayjs().subtract(1, "day"),
+        },
+        {
+          nama: "Hartoni",
+          keperluan: "Mengunjungi istri",
+          alamat: "Jalan Mawar 22",
+          institusi: "-",
+          tanggal: dayjs().add(2, "day"),
+        },
+      ];
+      setEntries(sampleEntries);
+      setFilteredData(sampleEntries);
+    }
+  }, [entries, setEntries]);
 
   const clearEntries = () => {
     setEntries([]);
@@ -92,8 +101,31 @@ const AdminData = () => {
     <Container className="align-items-center" style={{ minHeight: "100vh" }}>
       {isLoggedIn ? (
         <div>
+          <div className="mt-2 d-flex justify-content-between align-items-center w-100">
+            <div>
+              <Image
+                src={klatenLogo}
+                alt="City Logo"
+                style={{ maxHeight: "50px" }}
+                className="mb-2"
+                fluid
+              />
+            </div>
+            <div className="mx-auto text-center">
+              <Image
+                src={deptLogo}
+                alt="Department Logo"
+                style={{ maxHeight: "75px" }}
+                className="mb-2"
+                fluid
+              />
+            </div>
+            <div style={{ width: "50px" }} />
+          </div>
+
           <div className="d-flex justify-content-between align-items-center p-3">
             <div style={{ width: "33%" }}></div>
+
             <h1
               className="fw-bold text-center m-0"
               style={{ color: "#2b5ba2", width: "33%" }}
@@ -179,7 +211,7 @@ const AdminData = () => {
                       <th>Keperluan</th>
                       <th>Alamat</th>
                       <th>Institusi</th>
-                      <th>Tanggal</th>
+                      <th>Tanggal/Jam</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -188,10 +220,10 @@ const AdminData = () => {
                         <td>{index + 1}</td>
                         <td>{entry.nama}</td>
                         <td>{entry.keperluan}</td>
-                        <td>{entry.alamat}</td>
-                        <td>{entry.institusi}</td>
+                        <td>{entry.alamat ? entry.alamat : "-"}</td>
+                        <td>{entry.institusi ? entry.institusi : "-"}</td>
                         <td>
-                          {dayjs(entry.tanggal).format("DD-MM-YYYY HH:mm")}
+                          {dayjs(entry.tanggal).format("DD-MM-YYYY/HH:mm")}
                         </td>
                       </tr>
                     ))}
@@ -201,6 +233,7 @@ const AdminData = () => {
               <Button variant="danger" onClick={clearEntries}>
                 Hapus Semua
               </Button>
+              <p>*Data disimpan lokal.</p>
             </div>
           )}
         </div>

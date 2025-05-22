@@ -25,7 +25,7 @@ import { toast } from "react-toastify";
 const GuestbookForm = () => {
   const { setEntries } = useContext(GuestbookContext);
   const [formData, setFormData] = useState({
-    tanggal: dayjs().format("DD-MM-YYYY HH:mm"),
+    tanggal: dayjs(),
     nama: "",
     keperluan: "",
     alamat: "",
@@ -49,8 +49,9 @@ const GuestbookForm = () => {
 
     const formattedData = {
       ...formData,
-      tanggal: dayjs().format("DD-MM-YYYY HH:mm"),
+      tanggal: dayjs(),
     };
+    console.log(formattedData);
     setEntries((prevEntries) => [...prevEntries, formattedData]);
     setSubmitted(true);
     toast("Menuju halaman admin...");
