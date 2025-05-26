@@ -104,26 +104,38 @@ const AdminData = () => {
     <Container className="align-items-center" style={{ minHeight: "100vh" }}>
       {isLoggedIn ? (
         <div>
-          <div className="mt-2 d-flex justify-content-between align-items-center w-100">
-            <div>
+          <div
+            className="mt-2 position-relative w-100"
+            style={{ height: "80px" }}
+          >
+            <div
+              className="d-flex align-items-center"
+              style={{ position: "absolute", left: 0 }}
+            >
               <Image
                 src={klatenLogo}
                 alt="City Logo"
                 style={{ maxHeight: "50px" }}
-                className="mb-2"
                 fluid
               />
+              <div className="mx-2">
+                <p className="my-0 fw-bold" style={{ fontSize: "12px" }}>
+                  PEMERINTAH
+                </p>
+                <p className="my-0 fw-bold" style={{ fontSize: "12px" }}>
+                  KABUPATEN KLATEN
+                </p>
+              </div>
             </div>
-            <div className="mx-auto text-center">
+
+            <div className="position-absolute top-50 start-50 translate-middle">
               <Image
                 src={deptLogo}
                 alt="Department Logo"
                 style={{ maxHeight: "75px" }}
-                className="mb-2"
                 fluid
               />
             </div>
-            <div style={{ width: "50px" }} />
           </div>
 
           <div className="d-flex justify-content-between align-items-center p-3">
