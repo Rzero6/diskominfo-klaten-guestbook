@@ -14,6 +14,7 @@ import {
   FaBuilding,
   FaPaperPlane,
   FaPenAlt,
+  FaPhone,
 } from "react-icons/fa";
 import klatenLogo from "../assets/logo-klaten.png";
 import deptLogo from "../assets/logo-diskominfo-klaten.png";
@@ -28,6 +29,7 @@ const GuestbookForm = () => {
     tanggal: dayjs(),
     nama: "",
     keperluan: "",
+    noTelp: "",
     alamat: "",
     institusi: "",
   });
@@ -114,6 +116,24 @@ const GuestbookForm = () => {
                     name="nama"
                     placeholder="Nama Lengkap"
                     value={formData.nama}
+                    onChange={handleChange}
+                    required
+                  ></Form.Control>
+                  <Form.Control.Feedback type="invalid">
+                    Mohon di isi.
+                  </Form.Control.Feedback>
+                </InputGroup>
+              </Form.Group>
+              <Form.Group>
+                <InputGroup hasValidation className="mb-3">
+                  <InputGroupText>
+                    <FaPhone />
+                  </InputGroupText>
+                  <Form.Control
+                    type="tel"
+                    name="noTelp"
+                    placeholder="Nomor Telepon"
+                    value={formData.noTelp}
                     onChange={handleChange}
                     required
                   ></Form.Control>

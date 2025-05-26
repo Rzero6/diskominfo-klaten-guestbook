@@ -69,12 +69,14 @@ const AdminData = () => {
           nama: "Reynold Kunarto",
           keperluan: "Magang",
           alamat: "-",
+          noTelp: "0851231231223",
           institusi: "UAJY",
           tanggal: dayjs(),
         },
         {
           nama: "Suwarmi",
           keperluan: "Berkeluh kesah",
+          noTelp: "0851231231344",
           alamat: "-",
           institusi: "-",
           tanggal: dayjs().subtract(1, "day"),
@@ -82,6 +84,7 @@ const AdminData = () => {
         {
           nama: "Hartoni",
           keperluan: "Mengunjungi istri",
+          noTelp: "0851231231569",
           alamat: "Jalan Mawar 22",
           institusi: "-",
           tanggal: dayjs().add(2, "day"),
@@ -215,6 +218,7 @@ const AdminData = () => {
                     <tr>
                       <th>No</th>
                       <th>Nama</th>
+                      <th>No Telepon</th>
                       <th>Keperluan</th>
                       <th>Alamat</th>
                       <th>Institusi</th>
@@ -226,6 +230,7 @@ const AdminData = () => {
                       <tr key={index}>
                         <td>{index + 1}</td>
                         <td>{entry.nama}</td>
+                        <td>{entry.noTelp}</td>
                         <td>{entry.keperluan}</td>
                         <td>{entry.alamat ? entry.alamat : "-"}</td>
                         <td>{entry.institusi ? entry.institusi : "-"}</td>
