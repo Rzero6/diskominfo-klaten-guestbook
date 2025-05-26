@@ -62,7 +62,7 @@ const AdminData = () => {
     setFilteredData(filtered);
   }, [entries, date, search]);
 
-  useEffect(() => {
+  const populateEntries = () => {
     if (entries.length === 0) {
       const sampleEntries = [
         {
@@ -90,7 +90,7 @@ const AdminData = () => {
       setEntries(sampleEntries);
       setFilteredData(sampleEntries);
     }
-  }, [entries, setEntries]);
+  };
 
   const clearEntries = () => {
     setEntries([]);
@@ -149,7 +149,14 @@ const AdminData = () => {
           </div>
 
           {entries.length === 0 ? (
-            <p>Tidak ada data tamu.</p>
+            <div className="mt-3">
+              <h4 className="text-center text-danger fw-bold">
+                Tidak ada data tamu.
+              </h4>
+              <Button variant="success" onClick={populateEntries}>
+                Tambah Data
+              </Button>
+            </div>
           ) : (
             <div>
               <div className="d-flex align-items-center gap-3 mb-3">
@@ -230,12 +237,12 @@ const AdminData = () => {
                   </tbody>
                 </Table>
               </div>
-              <Button variant="danger" onClick={clearEntries}>
+              <Button className="my-2" variant="danger" onClick={clearEntries}>
                 Hapus Semua
               </Button>
-              <p>*Data disimpan lokal.</p>
             </div>
           )}
+          <p>*Data disimpan lokal.</p>
         </div>
       ) : (
         <div>Hey penyusup!!!</div>
