@@ -5,6 +5,7 @@ import GuestForm from "./pages/GuestForm";
 import AdminData from "./pages/AdminData";
 import { GuestbookProvider } from "./api/GuestBookContext.jsx";
 import { ToastContainer } from "react-toastify";
+import PrivateRoute from "./pages/PrivateRoute.jsx";
 
 const AppRouter = () => {
   return (
@@ -13,8 +14,14 @@ const AppRouter = () => {
         <Routes>
           <Route path="/" element={<GuestForm />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/guestbook" element={<AdminData />} />
-          
+          <Route
+            path="/guestbook"
+            element={
+              <PrivateRoute>
+                <AdminData />
+              </PrivateRoute>
+            }
+          />
           <Route path="*" element={<div>Routes Not Found!</div>} />
         </Routes>
         <ToastContainer

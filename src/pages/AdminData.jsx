@@ -19,15 +19,15 @@ import klatenLogo from "../assets/logo-klaten.png";
 import deptLogo from "../assets/logo-diskominfo-klaten.png";
 
 const AdminData = () => {
-  const { entries, setEntries } = useContext(GuestbookContext);
+  const { entries, setEntries, isLoggedIn, logout } =
+    useContext(GuestbookContext);
   const [filteredData, setFilteredData] = useState(entries);
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const navigate = useNavigate();
   const [date, setDate] = useState(null);
   const [search, setSearch] = useState("");
 
   const handleLogout = () => {
-    setIsLoggedIn(false);
+    logout();
     toast.success("Berhasil logout.");
     navigate("/login");
   };

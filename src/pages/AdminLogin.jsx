@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   Button,
   Card,
@@ -11,9 +11,11 @@ import { FaUser, FaLock } from "react-icons/fa";
 import klatenLogo from "../assets/logo-klaten.png";
 import deptLogo from "../assets/logo-diskominfo-klaten.png";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom"; // <-- Import this
+import { useNavigate } from "react-router-dom";
+import { GuestbookContext } from "../api/GuestBookContext";
 
 const AdminLogin = () => {
+  const { login, isLoggedIn } = useContext(GuestbookContext);
   const [loginData, setLoginData] = useState({
     username: "",
     password: "",
@@ -27,13 +29,18 @@ const AdminLogin = () => {
   const handleValidate = (e) => {
     e.preventDefault();
     if (loginData.username === "admin" && loginData.password === "12345") {
+      login();
       toast.success("Login Sukses!");
       navigate("/guestbook");
     } else {
       toast.error("Salah username/password. hint: admin/12345");
     }
   };
-
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/guestbook");
+    }
+  }, [isLoggedIn, navigate]);
   return (
     <Container
       fluid

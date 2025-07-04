@@ -56,10 +56,10 @@ const GuestbookForm = () => {
     console.log(formattedData);
     setEntries((prevEntries) => [...prevEntries, formattedData]);
     setSubmitted(true);
-    toast("Menuju halaman admin...");
-    setTimeout(() => {
-      navigate("/login");
-    }, 3000);
+    // toast("Menuju halaman admin...");
+    // setTimeout(() => {
+    //   navigate("/login");
+    // }, 3000);
   };
 
   const navigate = useNavigate();
